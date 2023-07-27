@@ -12,10 +12,9 @@ export const craetePet = async (req, res) => {
     await UserModel.findByIdAndUpdate(req.body.owner, {
       $push: { pets: [newPet._id] }
     })
-    res.sendStatus(201)
+    res.status(201).json({ message: 'Pet created' })
   } catch (error) {
-    console.log(error.message)
-    res.sendStatus(406)
+    res.status(406).json({ message: error.message })
   }
 }
 

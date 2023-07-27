@@ -17,8 +17,5 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/pet', petRoutes)
 app.use('/api/vaccine', vaccineRoutes)
-app.get('/api/hello', (res) => {
-  res.json('hello world from db')
-})
 
 export default app
