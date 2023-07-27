@@ -1,5 +1,5 @@
 import express from 'express'
-import cors from 'cors'
+// import cors from 'cors'
 import userRoutes from './routes/user.routes.js'
 import petRoutes from './routes/pet.routes.js'
 import authRoutes from './routes/auth.routes.js'
@@ -17,5 +17,8 @@ app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/pet', petRoutes)
 app.use('/api/vaccine', vaccineRoutes)
+app.use('/api/hello', (res) => {
+  res.json('hello world from db')
+})
 
 export default app

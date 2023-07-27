@@ -2,7 +2,6 @@
  * Rest API with Node.js, Express and MongoDB
  * to PetCare App
  */
-
 import app from './app.js'
 import dotenv from 'dotenv'
 import './database.js'
