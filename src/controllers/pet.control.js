@@ -54,8 +54,6 @@ export const deletePet = async (req, res) => {
     const pet = await PetModel.findById(req.params.id)
     console.log(pet)
     await UserModel.findByIdAndUpdate(pet.owner, {
-      // $pull: { pets: [req.params.id] },
-      // remove pet id of pets array
       $pull: { pets: req.params.id }
     })
     await PetModel.findByIdAndDelete(req.params.id)
