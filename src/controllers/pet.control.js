@@ -7,6 +7,12 @@ export const craetePet = async (req, res) => {
     if (!existOwner) {
       res.json({ message: 'owner not found' }, { status: 404 })
     }
+    const existPet = await PetModel.findOne({ name: req.body.name })
+    if (existPet) {
+      if (existPet.owner.toString() === req.body.owner) {
+        return res.json({ message: `${req.body.name} ya existe!` }, { status: 404 })
+      }
+    }
     const newPet = new PetModel(req.body)
     await newPet.save()
     await UserModel.findByIdAndUpdate(req.body.owner, {
@@ -46,11 +52,14 @@ export const getAllPets = async (req, res) => {
 export const deletePet = async (req, res) => {
   try {
     const pet = await PetModel.findById(req.params.id)
+    console.log(pet)
     await UserModel.findByIdAndUpdate(pet.owner, {
-      $pull: { pets: [req.params.id] }
+      // $pull: { pets: [req.params.id] },
+      // remove pet id of pets array
+      $pull: { pets: req.params.id }
     })
     await PetModel.findByIdAndDelete(req.params.id)
-    res.sendStatus(404)
+    res.sendStatus(204)
   } catch (error) {
     res.sendStatus(406)
   }
