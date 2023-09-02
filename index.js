@@ -2,9 +2,9 @@
  * Rest API with Node.js, Express and MongoDB
  * to PetCare App
  */
-import app from './app.js'
+import app from './src/app.js'
 import dotenv from 'dotenv'
-import './database.js'
+import './src/database.js'
 dotenv.config() // load enviroment variables from .env file
 
 const PORT = process.env.NODE_ENV === 'development' ? 3000 : process.env.PORT
